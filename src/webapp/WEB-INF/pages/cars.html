@@ -3,18 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New generation</title>
+    <title>Cars</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
+    <th:block th:each="car : ${cars}">
+        <h1 th:text="${car}"></h1>
     </th:block>
-</div>
-
-<div>
-    <button class="w3-container w3-blue-grey w3-opacity w3-right-align" onclick="location.href='/cars'">Cars</button>
 </div>
 
 </body>
