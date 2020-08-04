@@ -9,9 +9,28 @@
 <body>
 <div>
     <th:block th:each="car : ${cars}">
-        <h1 th:text="${car}"></h1>
+        <h1 th:text="${car.getBrand()}"></h1>
     </th:block>
 </div>
+
+
+<table id="carList">
+    <thead>
+    <tr>
+        <th> Brand </th>
+        <th> Model </th>
+        <th> Series </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}"
+        th:style="${car} ? 'background: #f0f0f2;' : 'background: #ffffff;'">
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.series}"></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
