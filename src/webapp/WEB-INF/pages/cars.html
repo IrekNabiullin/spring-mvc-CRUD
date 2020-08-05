@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Cars</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-<div>
-    <th:block th:each="car : ${cars}">
-        <h1 th:text="${car.getBrand()}"></h1>
-    </th:block>
-</div>
+<header th:align="center">
+    <h1 th:text="${headline}"></h1>
+</header>
 
-
-<table id="carList">
+<table id="carList" width="400" border="1" align="center">
     <thead>
     <tr>
         <th> Brand </th>
@@ -23,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="car : ${cars}"
+    <tr th:each="car : ${carList}"
         th:style="${car} ? 'background: #f0f0f2;' : 'background: #ffffff;'">
         <td th:text="${car.brand}"></td>
         <td th:text="${car.model}"></td>

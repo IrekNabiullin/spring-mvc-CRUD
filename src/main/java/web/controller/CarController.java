@@ -16,10 +16,12 @@ import java.util.ResourceBundle;
 public class CarController {
 
     @GetMapping(value = "/cars")
-    public String getCars(@RequestParam(name="locale", defaultValue = "en", required = false)String locale, ModelMap model) {
-        model.addAttribute("cars", new ServiceCar().getCars());
+    public String getCars(@RequestParam(name="locale", defaultValue = "en", required = false)String locale, ModelMap modelMap) {
+        modelMap.addAttribute("carList", new ServiceCar().getCars());
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + locale);
-        model.addAttribute("headline", bundle.getString("headline"));
+        System.out.println("bundle = " + bundle);
+        modelMap.addAttribute("headline", bundle.getString("headline"));
+        System.out.println("headline = " + bundle.getString("headline"));
         return "cars";
     }
 }

@@ -11,7 +11,7 @@ public class ServiceCar {
         List<Car> cars = new ArrayList<>();
         cars.add(new Car("Toyota", "Crown", 120));
         cars.add(new Car("Suzuki", "Vitara", 140));
-        cars.add(new Car("Nissan", "Микра", 110));
+        cars.add(new Car("Ниссан", "Микра", 110));
         return cars;
     }
 }
