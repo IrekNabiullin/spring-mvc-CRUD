@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<header th:align="center">
+    <h1 th:text="${usersHeadline}"></h1>
+</header>
+
+<table id="carList" width="400" border="1" align="center">
+    <thead>
+    <tr>
+        <th> Brand </th>
+        <th> Model </th>
+        <th> Series </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${carList}"
+        th:style="${car} ? 'background: #f0f0f2;' : 'background: #ffffff;'">
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.series}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
