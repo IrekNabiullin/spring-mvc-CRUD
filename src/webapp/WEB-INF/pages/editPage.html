@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<!--<body>-->
+<!--<div class="block1">-->
+<!--    <button class="w3-container w3-blue-grey w3-opacity w3-right-align" onclick="location.href='/editPage'" >Fill the form</button>-->
+<!--</div>-->
+<!--<div class="container">-->
+<!--    <div th:replace="fragments/header :: header"></div>-->
+<!--    <div th:if="${not #lists.isEmpty(user)}">-->
+<!--        <div th:replace="operations/list :: car"></div>-->
+<!--    </div>-->
+<!--    <div th:replace="fragments/footer :: footer"></div>-->
+<!--</div>-->
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark"
+         style="background-color: #b3159b">
+        <div>
+            <a href="http://localhost:8080/" class="navbar-brand">  </a>
+        </div>
+    </nav>
+</header>
+<br>
+
+<div class="container col-md-5">
+    <div class="card">
+        <div class="card-body">
+            <form action="/new" method="post">
+                <caption>
+                    <h2>
+                        Add New User
+                    </h2>
+                </caption>
+
+                <fieldset class="form-group">
+                    <label>User Name</label> <input type="text"
+                                                     value="<c:out value='${user.name}' />" class="form-control"
+                                                     name="name" required="required">
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>User Last Name</label> <input type="text"
+                                                        value="<c:out value='${user.last_name}' />" class="form-control"
+                                                        name="last-name" required="required">
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label>User Email</label> <input type="text"
+                                                     value="<c:out value='${user.email}' />" class="form-control"
+                                                     name="email" required="required">
+                </fieldset>
+
+                <button type="submit" class="btn btn-success">Save </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <button class="w3-container w3-blue-grey w3-opacity w3-right-align" onclick="location.href='/editPage'" >Fill the form</button>
+</div>
+</body>
+</html>

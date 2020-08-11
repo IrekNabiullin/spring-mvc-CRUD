@@ -11,12 +11,12 @@ import java.util.List;
 @Controller
 public class HelloController {
 
-	@GetMapping(value = "/hello")
+	@GetMapping(value = "/secret")
 	public String printWelcome(ModelMap model) {
 		List<String> messages = new ArrayList<>();
-		messages.add("Hello!");
-		messages.add("I'm Spring MVC application");
-		messages.add("5.2.0 version by sep'19 ");
+		messages.add("BINGO!!!");
+		messages.add("You win a new CAR!");
+		messages.add("Enter your name to get the car.");
 		model.addAttribute("messages", messages);
 		return "index";
 	}

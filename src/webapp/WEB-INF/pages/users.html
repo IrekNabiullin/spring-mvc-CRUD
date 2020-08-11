@@ -3,6 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
+    <style type="text/css">
+        .block1 {
+            width: 200px;
+            background: #ccc;
+            padding: 5px;
+            padding-right: 20px;
+            border: solid 1px black;
+            float: left;
+        }
+        .block2 {
+            width: 200px;
+            background: #fc0;
+            padding: 5px;
+            border: solid 1px black;
+            float: left;
+            position: relative;
+            top: 40px;
+            left: -70px;
+        }
+    </style>
 </head>
 <body>
 <header th:align="center">
@@ -12,20 +32,24 @@
 <table id="carList" width="400" border="1" align="center">
     <thead>
     <tr>
-        <th> Brand </th>
-        <th> Model </th>
-        <th> Series </th>
+        <th> Name </th>
+        <th> Last Name </th>
+        <th> E-mail </th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="car : ${carList}"
-        th:style="${car} ? 'background: #f0f0f2;' : 'background: #ffffff;'">
-        <td th:text="${car.brand}"></td>
-        <td th:text="${car.model}"></td>
-        <td th:text="${car.series}"></td>
+    <tr th:each="user : ${users}"
+        th:style="${user} ? 'background: #f0f0f2;' : 'background: #ffffff;'">
+        <td th:text="${user.getFirstName()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getEmail()}"></td>
     </tr>
     </tbody>
 </table>
+
+<div class="block1">
+        <button th:align="center" class="w3-container w3-blue-grey w3-opacity w3-right-align" onclick="location.href='/editPage'" >Add new user</button>
+</div>
 
 </body>
 </html>
