@@ -28,7 +28,7 @@ public class UserServiceImp implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public User getUserById(long id) {
+    public User getUserById(Long id) {
         return userDao.getUserById(id);
     }
 

@@ -31,6 +31,13 @@ public class UserDaoImp implements UserDao {
                 .createQuery("select u from User u", User.class)
                 .getResultList();
     }
+
+
+    @Transactional
+    @Override
+    public User getUserById(Long id){
+        return entityManager.find(User.class, id);
+    }
     /*
     @Transactional(readOnly=true)
     @Override
@@ -63,16 +70,6 @@ public class UserDaoImp implements UserDao {
         logger.info("User saved with id: " + user.getId());
     }
 
-    @Transactional
-    @Override
-    public User getUserById(long id){
-        String hqlUser = "from User u where id = '" + id + "'";
-        TypedQuery<User> query = entityManager.createNamedQuery(hqlUser, User.class);
-        query.setParameter("id", id);
-        User userGotById = query.getSingleResult();
-        System.out.println("User " + userGotById.getFirstName() + " " + userGotById.getLastName());
-        return userGotById;
-    }
 
 //    @Override
 //    public User getUserById(long id) {
@@ -101,7 +98,7 @@ public class UserDaoImp implements UserDao {
         User user = getUserById(id);
         User mergedContact = entityManager.merge(user);
         entityManager.remove(mergedContact);
-        logger.info("Singer with id: " + user.getId() + " deleted successfully");
+        logger.info("User with id: " + user.getId() + " deleted successfully");
     }
 
     @Transactional

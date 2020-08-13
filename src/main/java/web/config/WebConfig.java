@@ -25,9 +25,6 @@ import javax.sql.DataSource;
 @ComponentScan("web")
 public class WebConfig implements WebMvcConfigurer {
 
-//    @Autowired
-//    private Environment env;
-
     private final ApplicationContext applicationContext;
 
 
@@ -61,17 +58,4 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setCharacterEncoding("UTF-8");
         resolver.setContentType("text/html; charset=UTF-8");
     }
-/*
-    @Bean
-    public DataSource getDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("db.driver"));
-        dataSource.setUrl(env.getProperty("db.url"));
-        dataSource.setUsername(env.getProperty("db.username"));
-        dataSource.setPassword(env.getProperty("db.password"));
-        return dataSource;
-    }
-
-
- */
  }
