@@ -16,15 +16,11 @@ import java.util.List;
 @Transactional
 @SuppressWarnings("unchecked")
 public class UserDaoImp implements UserDao {
-
-    final static String ALL_SINGER_NATIVE_QUERY =
-            "select id, name, last_name, email, from users";
-
     private static Logger logger = LoggerFactory.getLogger(UserDaoImp.class);
 
     @PersistenceContext
     EntityManager entityManager;
-
+    @Transactional
     @Override
     public List<User> listUsers() {
         return entityManager
@@ -32,32 +28,13 @@ public class UserDaoImp implements UserDao {
                 .getResultList();
     }
 
-
     @Transactional
     @Override
     public User getUserById(Long id){
         return entityManager.find(User.class, id);
     }
-    /*
-    @Transactional(readOnly=true)
-    @Override
-    public List<User> listUsers() {
-        return entityManager
-                .createNamedQuery(User.FIND_ALL, User.class).getResultList();
-    }
-     */
 
-    /*
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
-        String hql = "select u from User u";
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
-        return query.getResultList();
-    }
- */
-
-
+    @Transactional
     @Override
     public void addUser(User user) {
         if (user.getId() == null) {
@@ -70,26 +47,12 @@ public class UserDaoImp implements UserDao {
         logger.info("User saved with id: " + user.getId());
     }
 
-
-//    @Override
-//    public User getUserById(long id) {
-//        User userGotById;
-//        try {
-//            String hqlUser = "from User u where id = '" + id + "'";
-//            TypedQuery<User> queryUser = sessionFactory.getCurrentSession().createQuery(hqlUser);
-//            userGotById = queryUser.getSingleResult();
-//            System.out.println("User " + userGotById.getFirstName() + " " + userGotById.getLastName());
-//        } catch (Exception e) {
-//            userGotById = null;
-//            System.out.println("No user is in the users table");
-//        }
-//        return userGotById;
-//    }
-
+    @Transactional
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
         logger.info("Updating existing user");
+
     }
 
     @Transactional
@@ -112,10 +75,4 @@ public class UserDaoImp implements UserDao {
             entityManager.remove(mergedContact);
         }
     }
-
-    @Transactional
-    public List<User> findAllByNativeQuery() {
-        return entityManager.createNativeQuery(ALL_SINGER_NATIVE_QUERY, "singerResult").getResultList();
-    }
-
 }

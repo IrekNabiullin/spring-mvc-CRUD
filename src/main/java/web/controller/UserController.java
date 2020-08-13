@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
@@ -16,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/", produces = "text/html; charset=utf-8")
     public String getUsers(@RequestParam(name = "locale", defaultValue = "en", required = false) String locale, ModelMap modelMap) {
         modelMap.addAttribute("users", userService.listUsers());
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + locale);
@@ -24,31 +25,49 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("/edit")
+    @GetMapping(value = "/edit", produces = "text/html; charset=utf-8")
     public String editPage(@RequestParam(value = "id") String id, ModelMap modelMap) {
         Long userId = Long.parseLong(id);
         User user = userService.getUserById(userId);
-        modelMap.addAttribute("users", userService.getUserById(userId));
+        modelMap.addAttribute("users", user);
         return "editPage";
     }
 
-    @PostMapping(value = "/edit")
-    public String editUser(@RequestParam(value = "name") String name,
+    @PostMapping(value = "/edit", produces = "text/html; charset=utf-8")
+    public String editUser(@RequestParam(value = "id") String id,
+                           @RequestParam(value = "name") String name,
                            @RequestParam(value = "last_name") String last_name,
                            @RequestParam(value = "email") String email,
                            @RequestParam(value = "login") String login,
-                           @RequestParam(value = "password") String password) {
-        User tempUser = new User(name, last_name, email, login, password);
+                           @RequestParam(value = "password") String password,
+                           ModelMap modelMap,
+                           @RequestParam(name = "locale", defaultValue = "en", required = false) String locale) {
+        Long userId = Long.parseLong(id);
+        System.out.println("user Id = " + id);
+        System.out.println("new userId = " + userId);
+        User tempUser = new User(userId, name, last_name, email, login, password);
+        tempUser.setId(userId);
+        System.out.println("control new userId = " + tempUser.getId());
         userService.updateUser(tempUser);
-        return "editPage";
+        System.out.println("User updated:");
+        System.out.println("id = " + tempUser.getId());
+        System.out.println("name = " + tempUser.getFirstName());
+        System.out.println("last_name = " + tempUser.getLastName());
+        System.out.println("email = " + tempUser.getEmail());
+
+        ResourceBundle bundle = ResourceBundle.getBundle("language_" + locale);
+        modelMap.addAttribute("usersHeadline", bundle.getString("usersHeadline"));
+        System.out.println("headline = " + bundle.getString("usersHeadline"));
+        modelMap.addAttribute("users", userService.listUsers());
+        return "users";
     }
 
-    @GetMapping(value = "/add")
+    @GetMapping(value = "/add", produces = "text/html; charset=utf-8")
     public String addForm() {
         return "addPage";
     }
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/add", produces = "text/html; charset=utf-8")
     public String addNewUser(@RequestParam(value = "name") String name,
                              @RequestParam(value = "last_name") String last_name,
                              @RequestParam(value = "email") String email,

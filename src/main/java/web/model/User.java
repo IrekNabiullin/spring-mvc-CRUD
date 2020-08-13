@@ -43,7 +43,7 @@ public class User {
         this.password = password;
     }
 
-    public User(long id, String firstName, String lastName, String email, String login, String password) {
+    public User(Long id, String firstName, String lastName, String email, String login, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
