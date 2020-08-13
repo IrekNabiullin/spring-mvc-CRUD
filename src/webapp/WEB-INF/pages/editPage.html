@@ -23,31 +23,35 @@
                 <fieldset class="form-group">
                     <label>User Name</label> <input type="text"
                                                     class="form-control"
-                                                    th:value=${user.}
+                                                    th:value='${users.getFirstName()}'
                                                     name="name" required="required"/>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label>User Last Name</label> <input type="text"
                                                          class="form-control"
+                                                         th:value='${users.getLastName()}'
                                                          name="last_name" required="required"/>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label>User Email</label> <input type="text"
                                                      class="form-control"
+                                                     th:value='${users.getEmail()}'
                                                      name="email" required="required">
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label>User Login</label> <input type="text"
                                                      class="form-control"
+                                                     th:value='${users.getLogin()}'
                                                      name="login" required="required">
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label>User Password</label> <input type="text"
                                                         class="form-control"
+                                                        th:value='${users.getPassword()}'
                                                         name="password" required="required">
                 </fieldset>
                 <p>
