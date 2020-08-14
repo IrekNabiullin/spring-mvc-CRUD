@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/", produces = "text/html; charset=utf-8")
+    @GetMapping(value = "/")
     public String getUsers(@RequestParam(name = "locale", defaultValue = "en", required = false) String locale, ModelMap modelMap) {
         modelMap.addAttribute("users", userService.listUsers());
         ResourceBundle bundle = ResourceBundle.getBundle("language_" + locale);
@@ -25,7 +25,7 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping(value = "/edit", produces = "text/html; charset=utf-8")
+    @GetMapping(value = "/edit")
     public String editPage(@RequestParam(value = "id") String id, ModelMap modelMap) {
         Long userId = Long.parseLong(id);
         User user = userService.getUserById(userId);
@@ -33,7 +33,7 @@ public class UserController {
         return "editPage";
     }
 
-    @PostMapping(value = "/edit", produces = "text/html; charset=utf-8")
+    @PostMapping(value = "/edit")
     public String editUser(@RequestParam(value = "id") String id,
                            @RequestParam(value = "name") String name,
                            @RequestParam(value = "last_name") String last_name,
@@ -62,7 +62,7 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping(value = "/add", produces = "text/html; charset=utf-8")
+    @GetMapping(value = "/add")
     public String addForm() {
         return "addPage";
     }
@@ -74,6 +74,8 @@ public class UserController {
                              @RequestParam(value = "login") String login,
                              @RequestParam(value = "password") String password) {
         userService.addUser(new User(name, last_name, email, login, password));
+        System.out.println("user added with name = " + name);
+        System.out.println("user added with last_name = " + last_name);
         return "addPage";
     }
 
